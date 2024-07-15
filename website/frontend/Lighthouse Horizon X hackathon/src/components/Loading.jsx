@@ -1,11 +1,11 @@
-import React from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 
 function Loading() {
-  return (
-    <Spinner animation="border" role="status">
-      Loading...
+  return (<>
+    <Spinner animation="border" role="status">     
     </Spinner>
+    Loading...
+  </>
   )
 }
 
