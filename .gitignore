@@ -1,0 +1,11 @@
+# ignore ALL .log files
+*.log
+
+# ignore ALL files in ANY directory named temp
+temp/ 
+
+# dotenv environment variables file
+
+.env
+.env.test
+.env.dev
