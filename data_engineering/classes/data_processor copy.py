@@ -73,7 +73,6 @@ class DataProcessor:
         Returns:
             Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]: DataFrames for countries, cities, locations, and measurements.
         """
-        existing_llms = self.__fetch_table_as_dataframe(schema, table_names['llms_table'])
         existing_organisation = self.__fetch_table_as_dataframe(schema, table_names['organisation_table'])
         existing_type = self.__fetch_table_as_dataframe(schema, table_names['type_table'])
         existing_modality = self.__fetch_table_as_dataframe(schema, table_names['modality_table'])
@@ -81,9 +80,10 @@ class DataProcessor:
         existing_dependencies = self.__fetch_table_as_dataframe(schema, table_names['dependencies_table'])
         existing_access = self.__fetch_table_as_dataframe(schema, table_names['access_table'])
         existing_license = self.__fetch_table_as_dataframe(schema, table_names['license_table'])
-        
-        llms, organisation, type, modality, size, dependencies, access, license = [], [], [], [], [], [], [], []
-        llms_id_map, organisation_id_map, type_id_map , modality_id_map, size_id_map, dependencies_id_map, access_id_map, license_id_map = {}, {}, {}, {}, {}, {}, {}, {}
+        existing_llms = self.__fetch_table_as_dataframe(schema, table_names['llms_table'])
+
+        organisation, type, modality, size, dependencies, access, license, llms = [], [], [], [], [], [], [], []
+        organisation_id_map, type_id_map , modality_id_map, size_id_map, dependencies_id_map, access_id_map, license_id_map, llms_id_map = {}, {}, {}, {}, {}, {}, {}, {}
         
         def populate_id_map(df, id_map, id_col, key_cols, counter):
             for _, row in df.iterrows():
@@ -92,7 +92,6 @@ class DataProcessor:
                 counter = max(counter, row[id_col] + 1)
             return counter
 
-        llm_id_counter = populate_id_map(existing_llms, llms_id_map, 'llms_id', 'name', 1)
         organisation_id_counter = populate_id_map(existing_organisation, organisation_id_map, 'organisation_id', 'organisation', 1)
         type_id_counter = populate_id_map(existing_type, type_id_map, 'type_id', 'type', 1)
         modality_id_counter = populate_id_map(existing_modality, modality_id_map, 'modality_id', 'modality', 1)
@@ -100,6 +99,7 @@ class DataProcessor:
         dependencies_id_counter = populate_id_map(existing_dependencies, dependencies_id_map, 'dependencies_id', 'dependencies', 1)
         access_id_counter = populate_id_map(existing_dependencies, access_id_map, 'access_id', 'access', 1)
         license_id_counter = populate_id_map(existing_license, license_id_map, 'license_id', 'license_name', 1)
+        llm_id_counter = populate_id_map(existing_llms, llms_id_map, 'llms_id', 'name', 1)
 
         for result in results:
             llm = result['llm']
