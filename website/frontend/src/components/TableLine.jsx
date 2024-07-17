@@ -25,7 +25,9 @@ function TableLine({ lineData, setALLMData }) {
         {truncateDescription(lineData.description)}
       </td>
       <td className="px-4 py-2 border">{lineData.createdDate}</td>
-      <td className="px-4 py-2 border">{lineData.access}</td>
+      <td className="px-4 py-2 border">
+        {lineData.scoreX} / {lineData.scoreY}
+      </td>
     </tr>
   );
 }

@@ -29,8 +29,8 @@ function TableView({ lLMData, setALLMData }) {
             <th className="px-4 py-2 border">Name</th>
             <th className="px-4 py-2 border">Organisation</th>
             <th className="px-4 py-2 border">Description</th>
-            <th className="px-4 py-2 border">Created Date</th>
-            <th className="px-4 py-2 border">Score</th>
+            <th className="px-4 py-2 border">Created</th>
+            <th className="px-4 py-2 border">Score X / Y</th>
           </tr>
         </thead>
         <tbody>{tableLines}</tbody>
