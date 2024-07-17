@@ -12,23 +12,26 @@ import Card from "../components/UI/Card.jsx";
 //   fetchOneModel(id);
 // })
 
-
-function DetailedView({ aLLMData }) {                     // replace props with modelData
+function DetailedView({ aLLMData }) {
+  // replace props with modelData
   return (
     <div className="flex justify-center">
       <div className="text-left w-3/5">
         <span className="flex">
-          
           <span>
-            
-          <img src="https://placehold.co/100" alt="model logo" />
-</span>
-        <h3 className="text-gray-500 font-bold pb-2">
-          {aLLMData.organization}
-        </h3>
-        <h1 className="text-3xl pb-3">{aLLMData.name} </h1>
-        <p className="text-sm pb-3">Created: {aLLMData.createdDate}</p>
-        
+            <img
+              className="mr-5"
+              src="https://placehold.co/100"
+              alt="model logo"
+            />
+          </span>
+          <span>
+            <h3 className="text-gray-500 font-bold pb-2">
+              {aLLMData.organization}
+            </h3>
+            <h1 className="text-3xl pb-3">{aLLMData.name} </h1>
+            <p className="text-sm pb-3">Created: {aLLMData.createdDate}</p>
+          </span>
         </span>
         <p>{aLLMData.description}</p>
         <hr className="my-5" />
