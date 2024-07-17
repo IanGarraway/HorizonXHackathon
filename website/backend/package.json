@@ -17,18 +17,21 @@
   },
   "homepage": "https://github.com/IanGarraway/HorizonXHackathon#readme",
   "dependencies": {
+    "@sequelize/core": "^7.0.0-alpha.41",
+    "@sequelize/postgres": "^7.0.0-alpha.41",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-validator": "^7.1.0",
     "jsonwebtoken": "^9.0.2"
   },
-   "devDependencies": {
+  "devDependencies": {
     "c8": "^10.1.2",
     "chai": "^5.1.1",
     "mocha": "^10.4.0",
-    "supertest": "^7.0.0",
-    "sinon": "^18.0.0"
+    "sinon": "^18.0.0",
+    "supertest": "^7.0.0"
   }
 }
