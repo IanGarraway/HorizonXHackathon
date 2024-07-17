@@ -1,5 +1,9 @@
 import Card from "../components/UI/Card.jsx";
 
+// useparms get id
+//axios.get (pass in id)
+
+
 function DetailedView({ aLLMData }) {
   return (
     <div className="flex justify-center">

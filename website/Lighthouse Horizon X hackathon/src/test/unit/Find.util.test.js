@@ -40,4 +40,40 @@ describe("Tests of the Find Utility", () => {
         expect(result).toEqual(-1);
 
     })
+
+    test("That the indexByName can handle bad testname - numbers", () => {
+        //Arrange
+        const testName = 46;
+        
+        //Act
+        const result = Find.indexByName(data, testName)
+
+        //Assert
+        expect(result).toEqual(-1);
+
+    })
+
+    test("That the indexByName can handle bad testname - boolean", () => {
+        //Arrange
+        const testName = true;
+        
+        //Act
+        const result = Find.indexByName(data, testName)
+
+        //Assert
+        expect(result).toEqual(-1);
+
+    })
+
+    test("That the indexByName can handle empty array", () => {
+        //Arrange
+        const testName = true;
+        
+        //Act
+        const result = Find.indexByName([], testName)
+
+        //Assert
+        expect(result).toEqual(-1);
+
+    })
 })
