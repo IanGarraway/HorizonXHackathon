@@ -1,18 +1,35 @@
 import Card from "../components/UI/Card.jsx";
+// import Data from "./services/Data.service.js";
 
-// useparms get id
-//axios.get (pass in id)
+// const { id } = useParams();
+// const [modelData, setModelData] = useState({})
+
+// useEffect(() => {
+//   const fetchOneModel = async (id) => {
+//     const data = await Data.getOneModel(id);
+//     setLLMData(data);
+//   }
+//   fetchOneModel(id);
+// })
 
 
-function DetailedView({ aLLMData }) {
+function DetailedView({ aLLMData }) {                     // replace props with modelData
   return (
     <div className="flex justify-center">
       <div className="text-left w-3/5">
+        <span className="flex">
+          
+          <span>
+            
+          <img src="https://placehold.co/100" alt="model logo" />
+</span>
         <h3 className="text-gray-500 font-bold pb-2">
           {aLLMData.organization}
         </h3>
         <h1 className="text-3xl pb-3">{aLLMData.name} </h1>
         <p className="text-sm pb-3">Created: {aLLMData.createdDate}</p>
+        
+        </span>
         <p>{aLLMData.description}</p>
         <hr className="my-5" />
         <Card>

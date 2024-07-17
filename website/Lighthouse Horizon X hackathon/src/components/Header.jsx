@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Dialog, DialogPanel, PopoverGroup } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link } from 'react-router-dom';
 
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,13 +13,14 @@ export default function Example() {
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
-            <img
+          <Link to="/" className="-m-1.5 p-1.5">
+            <span className="text-lg">LightHouse</span>
+            {/* <img
               alt=""
               src="https://static.wixstatic.com/media/e66cd2_bfdfbe594a324d1baacd3e98f55cfb82~mv2.png/v1/fill/w_221,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e66cd2_bfdfbe594a324d1baacd3e98f55cfb82~mv2.png"
               className="h-8 w-auto"
-            />
-          </a>
+            /> */}
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
