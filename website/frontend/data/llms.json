@@ -20,7 +20,10 @@
     "intendedUses": "This model is designed to be used for multilingual tasks covering 23 languages.",
     "prohibitedUses": "unknown",
     "monitoring": "unknown",
-    "feedback": "https://huggingface.co/CohereForAI/aya-23-35B/discussions"
+    "feedback": "https://huggingface.co/CohereForAI/aya-23-35B/discussions",
+    "logo": "https://placehold.co/100",
+    "scoreX": "60",
+    "scoreY": "79"
   },
   {
     "id": 1,
@@ -43,6 +46,9 @@
     "intendedUses": "The model is intended for developer and enterprise use cases. It can process hours of video and audio, and hundreds of thousands of words or lines of code, making it beneficial for a wide range of tasks.",
     "prohibitedUses": "",
     "monitoring": "unknown",
-    "feedback": "none"
+    "feedback": "none",
+    "logo": "https://placehold.co/100",
+    "scoreX": "60",
+    "scoreY": "79"
   }
 ]
