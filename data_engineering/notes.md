@@ -13,3 +13,6 @@
   - bussiness score
   - value score
   - URL logos
+- size to numbers
+- organisations split
+- liecence urls
