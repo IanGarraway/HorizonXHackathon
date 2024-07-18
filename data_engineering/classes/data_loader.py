@@ -16,8 +16,11 @@ class DataLoader:
     def __init__(self, db_engine, schema: str, table_names: dict) -> None:
         """
         Initialise the DataLoader instance.
-        
+
         Args:
+            db_engine: SQLAlchemy database engine.
+            schema (str): Schema name in the PostgreSQL database.
+            table_names (dict): Dictionary of table names.
         """
         self.db_engine = db_engine
         self.schema = schema
@@ -150,34 +153,51 @@ class DataLoader:
         except SQLAlchemyError as error:
             logger.error(f"Error granting access for {schema}.{table_name}: {error}")
             raise RuntimeError(f"Error granting access for {schema}.{table_name}: {error}")
-        
-    def _upload_data(self, llms_df: pd.DataFrame) -> None:
+
+    def _upload_data(
+            self, 
+            organization_df: pd.DataFrame,
+            dependencies_df: pd.DataFrame, 
+            type_df: pd.DataFrame, 
+            modality_df: pd.DataFrame, 
+            size_df: pd.DataFrame, 
+            access_df: pd.DataFrame, 
+            license_df: pd.DataFrame, 
+            model_df: pd.DataFrame, 
+            model_organization_df: pd.DataFrame,
+            model_dependencies_df: pd.DataFrame
+        ) -> None:
         """
         Upload and configure data for tables in the database.
 
         Args:
-            llms_df (pd.DataFrame): DataFrame containing LLMs data.
+            **dataframes: DataFrames containing data for each table.
         """
         # Define column types for each table
-        llms_column_types = {
-            'llms_id': 'INT',
-            'type': 'VARCHAR(?)',
+        organization_column_types = {'organization_id': 'INT', 'organization': 'VARCHAR(?)', 'organization_logo_url': 'VARCHAR(256)'}
+        dependencies_column_types = {'dependencies_id': 'INT', 'dependencies': 'VARCHAR(256)'}
+        type_column_types = {'type_id': 'INT', 'type': 'VARCHAR(?)'}
+        modality_column_types = {'modality_id': 'INT', 'modality': 'VARCHAR(?)'}
+        size_column_types = {'size_id': 'INT', 'size': 'VARCHAR(?)'}
+        access_column_types = {'access_id': 'INT', 'access': 'VARCHAR(?)'}
+        license_column_types = {'license_id': 'INT', 'license': 'VARCHAR(?)'}
+        model_column_types = {
+            'model_id': 'INT',
+            'type_id': 'INT',
+            'modality_id': 'INT',
+            'size_id': 'INT',
+            'access_id': 'INT',
+            'license_id': 'INT',
             'name': 'VARCHAR(?)',
-            'organization': 'VARCHAR(?)',
             'description': 'VARCHAR(?)',
             'created_date': 'VARCHAR(?)',
             'url': 'VARCHAR(?)',
             'datasheet': 'VARCHAR(?)',
-            'modality': 'VARCHAR(?)',
-            'size': 'VARCHAR(?)',
             'sample': 'VARCHAR(?)',
             'analysis': 'VARCHAR(?)',
-            'dependencies': 'VARCHAR(?)',
             'included': 'VARCHAR(?)',
             'excluded': 'VARCHAR(?)',
             'quality_control': 'VARCHAR(?)',
-            'access': 'VARCHAR(?)',
-            'license': 'VARCHAR(?)',
             'intended_uses': 'VARCHAR(?)',
             'prohibited_uses': 'VARCHAR(?)',
             'monitoring': 'VARCHAR(?)',
@@ -193,19 +213,61 @@ class DataLoader:
             'user_distribution': 'VARCHAR(?)',
             'failures': 'VARCHAR(?)',
         }
+        model_organization_column_types = {'model_id': 'INT', 'organization_id': 'INT'}
+        model_dependencies_column_types = {'model_id': 'INT', 'dependencies_id': 'INT'}
 
         # Define primary keys for each table
         primary_keys = {
-            self.table_names['llms_table']: 'llms_id',
+            self.table_names['organization_table']: 'organization_id',
+            self.table_names['dependencies_table']: 'dependencies_id',
+            self.table_names['type_table']: 'type_id',
+            self.table_names['modality_table']: 'modality_id',
+            self.table_names['size_table']: 'size_id',
+            self.table_names['access_table']: 'access_id',
+            self.table_names['license_table']: 'license_id',
+            self.table_names['model_table']: 'model_id',
+            self.table_names['model_organization_table']: None,
+            self.table_names['model_dependencies_table']: None
         }
 
         # Define foreign keys for each table
         foreign_keys = {
+            self.table_names['organization_table']: {},
+            self.table_names['dependencies_table']: {},
+            self.table_names['type_table']: {},
+            self.table_names['modality_table']: {},
+            self.table_names['size_table']: {},
+            self.table_names['access_table']: {},
+            self.table_names['license_table']: {},
+            self.table_names['model_table']: {
+                'de10_na_horizonx_type': 'type_id',
+                'de10_na_horizonx_modality': 'modality_id', 
+                'de10_na_horizonx_size': 'size_id', 
+                'de10_na_horizonx_access': 'access_id', 
+                'de10_na_horizonx_license': 'license_id'
+                },
+            self.table_names['model_organization_table']: {
+                'de10_na_horizonx_organization': 'organization_id', 
+                'de10_na_horizonx_model': 'model_id'
+                },
+            self.table_names['model_dependencies_table']: {
+                'de10_na_horizonx_dependencies': 'dependencies_id', 
+                'de10_na_horizonx_model': 'model_id'
+                }
         }
-        
+
         # Upload data to each table
         table_data = [
-            (llms_df, self.table_names['llms_table'], llms_column_types)
+            (organization_df, self.table_names['organization_table'], organization_column_types),
+            (dependencies_df, self.table_names['dependencies_table'], dependencies_column_types),
+            (type_df, self.table_names['type_table'], type_column_types),
+            (modality_df, self.table_names['modality_table'], modality_column_types),
+            (size_df, self.table_names['size_table'], size_column_types),
+            (access_df, self.table_names['access_table'], access_column_types),
+            (license_df, self.table_names['license_table'], license_column_types),
+            (model_df, self.table_names['model_table'], model_column_types),
+            (model_organization_df, self.table_names['model_organization_table'], model_organization_column_types),
+            (model_dependencies_df, self.table_names['model_dependencies_table'], model_dependencies_column_types)
         ]
 
         # Upload and configure tables in PostgreSQL
