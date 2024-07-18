@@ -49,6 +49,8 @@ class DataProcessor:
         try:
             self.df_model['created_date'] = pd.to_datetime(self.df_model['created_date'], errors='coerce')
             self.df_model['model_id'] = range(1, len(self.df_model) + 1)
+            self.df_model['score_business_readiness'] = ""
+            self.df_model['score_perceived_value'] = ""
             logger.info("Data preprocessing completed successfully.")
         except KeyError as e:
             logger.error("Missing 'created_date' column in the data.")
@@ -63,7 +65,7 @@ class DataProcessor:
             logger.error("DataFrame is not loaded. Please load the data first.")
             raise ValueError("DataFrame is not loaded. Please load the data first.")
         try:
-            self.df_model['organization'] = self.df_model['organization'].str.split(',')
+            self.df_model['organization'] = self.df_model['organization'].str.split(', ')
             df_exploded = self.df_model.explode('organization')
             unique_values = df_exploded['organization'].unique()
             self.df_organization = pd.DataFrame(unique_values, columns=['organization'])
