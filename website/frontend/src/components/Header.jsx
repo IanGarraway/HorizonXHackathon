@@ -14,7 +14,7 @@ export default function Example() {
       >
         <div className="flex lg:flex-1">
           <Link to="/" className="-m-1.5 p-1.5">
-            <span className="text-lg">LightHouse</span>
+            <span className="text-lg font-poppins">LightHouse</span>
             {/* <img
               alt=""
               src="https://static.wixstatic.com/media/e66cd2_bfdfbe594a324d1baacd3e98f55cfb82~mv2.png/v1/fill/w_221,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e66cd2_bfdfbe594a324d1baacd3e98f55cfb82~mv2.png"
@@ -35,25 +35,25 @@ export default function Example() {
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           <NavLink
             to="/"
-            className="text-sm font-semibold leading-6 text-gray-900"
+            className="font-poppins text-sm leading-6 text-gray-900"
           >
             LLM List
           </NavLink>
           <NavLink
             to="#"
-            className="text-sm font-semibold leading-6 text-gray-900"
+            className="font-poppins text-sm leading-6 text-gray-900"
           >
             Matrix
           </NavLink>
           <NavLink
             to="#"
-            className="text-sm font-semibold leading-6 text-gray-900"
+            className="font-poppins text-sm leading-6 text-gray-900"
           >
             About
           </NavLink>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="#" className="font-poppins text-sm leading-6 text-gray-900">
             Log in <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
@@ -88,27 +88,27 @@ export default function Example() {
               <div className="space-y-2 py-6">
                 <NavLink
                   to="/"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  className="font-poppins -mx-3 block rounded-lg px-3 py-2 text-base leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Features
+                  LLM List
                 </NavLink>
                 <NavLink
                   to="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  className="font-poppins -mx-3 block rounded-lg px-3 py-2 text-base leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Marketplace
+                  Matrix
                 </NavLink>
                 <NavLink
                   to="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  className="font-poppins -mx-3 block rounded-lg px-3 py-2 text-base leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Company
+                  About
                 </NavLink>
               </div>
               {/* <div className="py-6">
                 <a
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  className="font-poppins -mx-3 block rounded-lg px-3 py-2.5 text-base leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Log in
                 </a>

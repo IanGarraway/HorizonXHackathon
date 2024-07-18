@@ -24,7 +24,7 @@ function TableView({ lLMData, setALLMData }) {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white border border-gray-200">
-        <thead className="bg-gray-200 sticky top-0 z-10">
+        <thead className="font-poppins bg-gray-200 sticky top-0 z-10">
           <tr>
             <th className="px-4 py-2 border">Name</th>
             <th className="px-4 py-2 border">Organisation</th>

@@ -23,15 +23,29 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <Header />
-      <Routes>
-        <Route
-          path="/"
-          element={<ListView lLMData={lLMData} setALLMData={setALLMData} />}
-        />
-        <Route path="/:id" element={<DetailedView aLLMData={aLLMData} />} />
-      </Routes>
+    <div className="min-h-screen font-open">
+      <div style={{
+        backgroundImage: "url('logo.png')",
+        opacity: "0.04", height: "100vh",
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        position: "fixed",
+        top: "0px",
+        right: "0px",
+        bottom: "0px",
+        left: "0px",
+        zIndex:"-1"
+      }}> </div>
+        <Header />
+        <Routes>
+          <Route
+            path="/"
+            element={<ListView lLMData={lLMData} setALLMData={setALLMData} />}
+          />
+          <Route path="/:id" element={<DetailedView aLLMData={aLLMData} />} />
+        </Routes>
+      
     </div>
   );
 }
