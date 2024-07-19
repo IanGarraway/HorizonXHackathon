@@ -1,5 +1,6 @@
 import logging
 import pandas as pd
+import re
 from typing import Optional, Tuple
 
 # Configure the logging module
@@ -75,6 +76,7 @@ class DataProcessor:
             self.df_model_organization = self.df_model_organization[['model_id', 'organization_id']]
 
             self.df_organization['organization_logo_url'] = ""
+            self.df_model = self.df_model.drop('organization', axis=1)
 
             logger.info("Organization data processing completed successfully.")
         except KeyError as e:
@@ -99,7 +101,8 @@ class DataProcessor:
             
             self.df_model_dependencies = pd.merge(df_exploded, self.df_dependencies, on='dependencies')
             self.df_model_dependencies = self.df_model_dependencies[['model_id', 'dependencies_id']]
-            
+            self.df_model = self.df_model.drop('dependencies', axis=1)
+
             logger.info("Dependencies data processing completed successfully.")
         except KeyError as e:
             logger.error(f"Missing column in the data: {e}")
@@ -132,6 +135,69 @@ class DataProcessor:
             logger.error(f"Unexpected error during {column_name} column replacement: {e}")
             raise
 
+    @staticmethod
+    def extract_and_remove_urls(text):
+        if not isinstance(text, str):
+            return [], text
+        url_pattern = r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
+        urls = re.findall(url_pattern, text)
+        text_without_urls = re.sub(url_pattern, '', text)
+        return urls, text_without_urls
+
+    @staticmethod
+    def extract_numbers_and_units(text: str) -> Tuple[Optional[float], Optional[str]]:
+        """
+        Extracts numbers and units from a given text and converts the numbers to a standard numerical value.
+
+        Args:
+            text (str): The input text containing numbers and units.
+
+        Returns:
+            Tuple[Optional[float], Optional[str]]: A tuple containing the numerical value and the unit.
+        """
+        if not isinstance(text, str):
+            return None, None
+
+        # Standardize text by replacing full words with single letters for easier processing
+        text = text.replace(' trillions', 'T')
+        text = text.replace(' trillion', 'T')
+        text = text.replace(' billions', 'B')
+        text = text.replace(' billion', 'B')
+        text = text.replace(' millions', 'M')
+        text = text.replace(' million', 'M')
+        text = text.replace(' thousands', 'K')
+        text = text.replace(' thousand', 'K')
+        text = text.replace('k', 'K')
+
+        number_pattern = r'([\d\.]+(?:[BMKT]?)?)'
+        unit_pattern = r'(parameters \(dense\)|parameters \(sparse\)|parameters \(dense model\)|parameters|documents|captions paired with 0.5M audio clips|tokens|text-video pairs at 8FPS|hours|text queries|prompts|instructions|judge samples|images|videos|tasks|hours audio|hours audio with pseudolabels|\(image, text\) pairs|words|annotated video clip pairs|vision-language datasets|video clip pairs|video clips|image-text pairs|ratings|songs|captions|comparisons|response pairs|observations|samples|dialogues|examples|human-annotated prompt-completion pairs|instruction-following demonstrations|labels of quantum and biological nature|GB|TB|MB|KB)'
+
+        number_match = re.search(number_pattern, text)
+        unit_match = re.search(unit_pattern, text)
+
+        if number_match:
+            number = number_match.group(1)
+            # Convert number to actual numerical value
+            if 'T' in number:
+                numeric_value = float(number.replace('T', '')) * 1e12
+            elif 'B' in number:
+                numeric_value = float(number.replace('B', '')) * 1e9
+            elif 'M' in number:
+                numeric_value = float(number.replace('M', '')) * 1e6
+            elif 'K' in number:
+                numeric_value = float(number.replace('K', '')) * 1e3
+            else:
+                try:
+                    numeric_value = float(number)
+                except ValueError:
+                    numeric_value = None
+        else:
+            numeric_value = None
+
+        unit = unit_match.group(0) if unit_match else None
+
+        return numeric_value, unit
+
     def _load_and_process_data(self) -> Tuple[pd.DataFrame, ...]:
         """Load and preprocess the data and return the processed DataFrames."""
         try:
@@ -142,6 +208,12 @@ class DataProcessor:
 
             for column in self.foreign_key_dfs.keys():
                 self.__replace_with_foreign_key(column)
+                
+                if self.foreign_key_dfs[column] is not None:
+                    self.foreign_key_dfs[column]['extracted_urls'], self.foreign_key_dfs[column][column] = zip(*self.foreign_key_dfs[column][column].apply(self.extract_and_remove_urls))
+                    
+                    if column == 'size':
+                        self.foreign_key_dfs[column]['numeric_size'], self.foreign_key_dfs[column]['unit'] = zip(*self.foreign_key_dfs[column]['size'].apply(self.extract_numbers_and_units))
 
             logger.info("Data loading and processing completed successfully.")
             return (
