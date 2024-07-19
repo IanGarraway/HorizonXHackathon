@@ -146,7 +146,7 @@ class DataLoader:
         """
         try:
             with self.db_engine.connect() as conn:
-                query = text(f"GRANT SELECT ON {schema}.{table_name} TO df_student;")
+                query = text(f"GRANT SELECT, INSERT, UPDATE, DELETE ON {schema}.{table_name} TO df_student;")
                 conn.execute(query)
                 conn.commit()
             logger.info(f"Access granted to table {schema}.{table_name} successfully.")
