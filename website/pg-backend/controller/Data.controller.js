@@ -7,7 +7,7 @@ export default class DataController {
     this.#dataService = dataService;
   }
 
-  getData = async (req, res) => {
+  getData = async (req, res) => {    
     try {
       const modelsData = await this.#dataService.getData(req);
 

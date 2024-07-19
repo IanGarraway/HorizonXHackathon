@@ -19,4 +19,4 @@ router.addRouter(dataRouter);
 const server = new Server(PORT, HOST, router);
 
 server.start();
-// database.connect();
+database.connect();

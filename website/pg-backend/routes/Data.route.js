@@ -34,7 +34,7 @@ export default class DataRoutes {
 
     //Data Routes
 
-    this.#router.get("/", [], this.#controller.getData);
+    this.#router.get("", [], this.#controller.getData);
   };
 
   getRouterStartPoint = () => {

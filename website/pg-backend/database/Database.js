@@ -20,6 +20,7 @@ export default class Database {
   connect = async () => {
     try {
       await Database.#client.connect();
+      console.log("db connection established");
     } catch (error) {
       console.log(error.message);
     }
