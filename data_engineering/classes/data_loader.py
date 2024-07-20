@@ -146,9 +146,12 @@ class DataLoader:
         """
         try:
             with self.db_engine.connect() as conn:
-                query = text(f"GRANT SELECT, INSERT, UPDATE, DELETE ON {schema}.{table_name} TO df_student;")
-                conn.execute(query)
-                conn.commit()
+                with conn.begin():  # Transaction management
+                    query = text(f"""
+                        GRANT SELECT, INSERT, UPDATE, DELETE ON {schema}.{table_name} TO df_student;
+                        GRANT SELECT, INSERT, UPDATE, DELETE ON {schema}.{table_name} TO modello_backend;
+                    """)
+                    conn.execute(query)
             logger.info(f"Access granted to table {schema}.{table_name} successfully.")
         except SQLAlchemyError as error:
             logger.error(f"Error granting access for {schema}.{table_name}: {error}")
