@@ -5,15 +5,18 @@ export default class DataService {
 
     const query = `
     SELECT *
-    FROM de10_na_horizonx_model AS model
-    FULL OUTER JOIN de10_na_horizonx_access AS a USING(access_id)
-    FULL OUTER JOIN de10_na_horizonx_license AS license USING(license_id)
-    FULL OUTER JOIN de10_na_horizonx_modality AS modality USING(modality_id)
-    FULL OUTER JOIN de10_na_horizonx_size AS s USING(size_id)
-    FULL OUTER JOIN de10_na_horizonx_type AS t USING(type_id)
-    FULL OUTER JOIN de10_na_horizonx_model_dependencies AS dependencies USING(model_id)
-    FULL OUTER JOIN de10_na_horizonx_model_organization AS organ USING(model_id);
-  `;
+    FROM student.de10_na_horizonx_model
+    JOIN student.de10_na_horizonx_access USING(access_id)
+    JOIN student.de10_na_horizonx_license USING(license_id)
+    JOIN student.de10_na_horizonx_modality USING(modality_id)
+    JOIN student.de10_na_horizonx_size USING(size_id)
+    JOIN student.de10_na_horizonx_type USING(type_id)
+    JOIN student.de10_na_horizonx_model_dependencies USING(model_id)
+    JOIN student.de10_na_horizonx_model_organization USING(model_id)
+    JOIN student.de10_na_horizonx_dependencies USING(dependencies_id)
+    JOIN student.de10_na_horizonx_organization USING(organization_id);
+    `;
+    
     const dbClient = Database.getClient();
     try {
       const result = await dbClient.query(query)

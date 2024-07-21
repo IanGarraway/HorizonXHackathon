@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import Loading from "./Loading";
 import TableLine from "./TableLine";
+import Filter from "../util/Filter.util.js";
 
-function TableView({ lLMData, setALLMData }) {
+function TableView({ lLMData, setALLMData, filters }) {
   const [tableLines, setTableLines] = useState([]);
 
   useEffect(() => {
     generateTable();
-  }, [lLMData]);
+  }, [lLMData, filters]);
 
   const generateTable = () => {
-    const tableData = lLMData.map((data) => (
+    let modelData = lLMData;
+    if (filters.name) { modelData = Filter.byName(modelData, filters.name); }
+    if (filters.organisation) { modelData = Filter.byOrganisation(modelData, filters.organisation); }
+    const tableData = modelData.map((data) => (
       <TableLine lineData={data} key={data.id} setALLMData={setALLMData} />
     ));
 
