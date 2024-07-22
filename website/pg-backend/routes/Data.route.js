@@ -34,6 +34,7 @@ export default class DataRoutes {
 
     //Data Routes
 
+    this.#router.get("/:id", [], this.#controller.getOneData);
     this.#router.get("", [], this.#controller.getData);
   };
 

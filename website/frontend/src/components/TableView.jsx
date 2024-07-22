@@ -3,25 +3,25 @@ import Loading from "./Loading";
 import TableLine from "./TableLine";
 import Filter from "../util/Filter.util.js";
 
-function TableView({ lLMData, setALLMData, filters }) {
+function TableView({ allModels, setAModel, filters }) {
   const [tableLines, setTableLines] = useState([]);
 
   useEffect(() => {
     generateTable();
-  }, [lLMData, filters]);
+  }, [allModels, filters]);
 
   const generateTable = () => {
-    let modelData = lLMData;
+    let modelData = allModels;
     if (filters.name) { modelData = Filter.byName(modelData, filters.name); }
     if (filters.organisation) { modelData = Filter.byOrganisation(modelData, filters.organisation); }
     const tableData = modelData.map((data) => (
-      <TableLine lineData={data} key={data.id} setALLMData={setALLMData} />
+      <TableLine lineData={data} key={data.model_id} setAModel={setAModel} />
     ));
 
     setTableLines(tableData);
   };
 
-  if (lLMData.length == 0) {
+  if (allModels.length == 0) {
     return <Loading />;
   }
 

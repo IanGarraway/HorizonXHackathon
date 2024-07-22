@@ -1,3 +1,4 @@
+import Stringify from "./Stringify.util";
 
 
 export default class Filter{
@@ -16,7 +17,7 @@ export default class Filter{
     static byOrganisation(modelList, org) {
         let newList = [];
         modelList.forEach(model => {
-            if (model.organization.toLowerCase().includes(org.toLowerCase())) {
+            if (Stringify.text(model.organizations).toLowerCase().includes(org.toLowerCase())) {
                 newList.push(model);
             }
         });

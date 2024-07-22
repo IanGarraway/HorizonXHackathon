@@ -16,4 +16,15 @@ export default class DataController {
       return res.status(500).send({ message: e.message });
     }
   };
+
+  getOneData = async (req, res) => {
+    const { id } = req.params;
+    //console.log(req);
+    try {
+      const modelData = await this.#dataService.getOneData(id)
+      return res.status(200).send(modelData);
+    } catch (e) {
+      return res.status(500).send({message: e.message})
+    }
+  }
 }
