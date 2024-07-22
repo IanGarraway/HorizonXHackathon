@@ -16,11 +16,15 @@ export default class DataService {
     JOIN student.de10_na_horizonx_dependencies USING(dependencies_id)
     JOIN student.de10_na_horizonx_organization USING(organization_id);
     `;
+
+    const q2 = `
+    SELECT *
+    FROM main.actor;
+    `
     
     const dbClient = Database.getClient();
     try {
-      const result = await dbClient.query(query)
-      console.log(result.rows);
+      const result = await dbClient.query(query)      
       return result.rows;
       
     } catch (e) {
