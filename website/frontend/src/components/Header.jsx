@@ -15,11 +15,6 @@ export default function Example() {
         <div className="flex lg:flex-1">
           <Link to="/" className="-m-1.5 p-1.5">
             <span className="text-lg font-poppins">LightHouse</span>
-            {/* <img
-              alt=""
-              src="https://static.wixstatic.com/media/e66cd2_bfdfbe594a324d1baacd3e98f55cfb82~mv2.png/v1/fill/w_221,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/e66cd2_bfdfbe594a324d1baacd3e98f55cfb82~mv2.png"
-              className="h-8 w-auto"
-            /> */}
           </Link>
         </div>
         <div className="flex lg:hidden">
@@ -40,13 +35,13 @@ export default function Example() {
             LLM List
           </NavLink>
           <NavLink
-            to="#"
+            to="/matrix"
             className="font-poppins text-sm leading-6 text-gray-900"
           >
             Matrix
           </NavLink>
           <NavLink
-            to="#"
+            to="/about"
             className="font-poppins text-sm leading-6 text-gray-900"
           >
             About
@@ -93,13 +88,13 @@ export default function Example() {
                   LLM List
                 </NavLink>
                 <NavLink
-                  to="#"
+                  to="/matrix"
                   className="font-poppins -mx-3 block rounded-lg px-3 py-2 text-base leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Matrix
                 </NavLink>
                 <NavLink
-                  to="#"
+                  to="/about"
                   className="font-poppins -mx-3 block rounded-lg px-3 py-2 text-base leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   About

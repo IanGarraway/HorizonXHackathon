@@ -47,18 +47,32 @@ function DetailedView() {
               <p className="font-poppins text-gray-500 font-bold">
                 LightHouse Score
               </p>
-              <p>
-                Readiness:{" "}
-                <span className="font-bold text-gray-500">
-                  {modelData.score_business_readiness}
-                </span>
-              </p>
-              <p>
-                Perceived Value:{" "}
-                <span className="font-bold text-gray-500">
-                  {modelData.score_perceived_value}
-                </span>
-              </p>
+              <span>
+                <div class="mb-1 font-bold text-gray-500">
+                  Readiness: {modelData.score_business_readiness}
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
+                  <div
+                    class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"
+                    style={{
+                      width: `${modelData.score_business_readiness * 10}%`,
+                    }}
+                  ></div>
+                </div>
+              </span>
+              <span>
+                <div class="mb-1 font-bold text-gray-500">
+                  Perceived Value: {modelData.score_perceived_value}
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2 mb-4 dark:bg-gray-700">
+                  <div
+                    class="bg-orange-600 h-2 rounded-full dark:bg-blue-500"
+                    style={{
+                      width: `${modelData.score_perceived_value * 10}%`,
+                    }}
+                  ></div>
+                </div>
+              </span>
             </Card>
           </span>
           <p>{modelData.description}</p>

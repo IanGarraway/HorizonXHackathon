@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Data from "./services/Data.service";
-import Header from "./components/Header";
-import Footer from "./components/Footer.jsx";
-import ListView from "./pages/ListView.jsx";
+import About from "./pages/About.jsx";
+import Data from "./services/Data.service.js";
 import DetailedView from "./pages/DetailedView.jsx";
+import Footer from "./components/Footer.jsx";
+import Header from "./components/Header.jsx";
+import ListView from "./pages/ListView.jsx";
+import Matrix from "./pages/Matrix.jsx";
 
 function App() {
   const [allModels, setAllModels] = useState([]);
-  //const [aModel, setAModel] = useState([]);
 
   const getData = async () => {
     const newData = await Data.getAllData();
@@ -47,6 +48,8 @@ function App() {
       <Routes>
         <Route path="/" element={<ListView allModels={allModels} />} />
         <Route path="/:id" element={<DetailedView />} />
+        <Route path="/matrix" element={<Matrix />} />
+        <Route path="/about" element={<About />} />
       </Routes>
       <Footer />
     </div>
