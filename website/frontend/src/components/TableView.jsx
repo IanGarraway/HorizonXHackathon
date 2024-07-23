@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Loading from "./Loading";
-import TableLine from "./TableLine";
+import TableLine from "./TableLine.jsx";
 import Filter from "../util/Filter.util.js";
 
 function TableView({ allModels, filters }) {
@@ -11,20 +11,30 @@ function TableView({ allModels, filters }) {
   }, [allModels, filters]);
 
   const generateTable = () => {
-    let modelData = allModels;
-    if (filters.name) {
-      modelData = Filter.byName(modelData, filters.name);
-    }
-    if (filters.organisation) {
-      modelData = Filter.byOrganisation(modelData, filters.organisation);
-    }
-    console.log(modelData, `<---`);
-    const tableData = modelData.map((data) => (
+    const filteredModels = Filter.filterModels(allModels, filters);
+    console.log(filteredModels, `<---`);
+    const tableData = filteredModels.map((data) => (
       <TableLine lineData={data} key={data.model_id} />
     ));
 
     setTableLines(tableData);
   };
+
+  // const generateTable = () => {
+  //   let modelData = allModels;
+  //   if (filters.name) {
+  //     modelData = Filter.byName(modelData, filters.name);
+  //   }
+  //   if (filters.organisation) {
+  //     modelData = Filter.byOrganisation(modelData, filters.organisation);
+  //   }
+  //   console.log(modelData, `<---`);
+  //   const tableData = modelData.map((data) => (
+  //     <TableLine lineData={data} key={data.model_id} />
+  //   ));
+
+  //   setTableLines(tableData);
+  // };
 
   if (allModels.length == 0) {
     return <Loading />;

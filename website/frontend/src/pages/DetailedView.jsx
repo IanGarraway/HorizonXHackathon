@@ -5,49 +5,22 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Stringify from "../util/Stringify.util.js";
 
-function DetailedView({ aModel }) {
-  // const {
-  //   name,
-  //   organizations,
-  //   description,
-  //   created_date,
-  //   organization_logo_url,
-  //   score_business_readiness,
-  //   score_perceived_value,
-  //   url,
-  //   intended_uses,
-  //   prohibited_uses,
-  //   modality,
-  //   analysis,
-  //   size,
-  //   dependencies,
-  //   monitoring,
-  //   feedback,
-  //   model_card,
-  //   training_emissions,
-  //   training_time,
-  //   training_hardware,
-  //   quality_control,
-  //   terms_of_service,
-  //   monthly_active_users,
-  //   user_distribution,
-  //   license,
-  //   access,
-  // } = aModel;
-
-  const [modelData, setModelData] = useState({ loading: true });
-
+function DetailedView() {
+  const [modelData, setModelData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
     const fetchOneModel = async (id) => {
       const data = await Data.getOneModel(id);
-      setModelData(data);
+      setModelData(data[0]);
+      setIsLoading(false);
     };
     fetchOneModel(id);
   }, [id]);
 
-  if (modelData.loading) return <Loading />;
+  if (isLoading) return <Loading />;
+
   const orgs = Stringify.text(modelData.organizations);
   const dependencyString = Stringify.text(modelData.dependencies);
 

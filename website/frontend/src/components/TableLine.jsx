@@ -7,7 +7,6 @@ function TableLine({ lineData }) {
     // setAModel(lineData);
     navigate(`/${lineData.model_id}`);
   };
-  console.log(lineData, `<--tableLine`);
 
   // Function to truncate description to 150 characters
   const truncateDescription = (description) => {

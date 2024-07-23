@@ -10,7 +10,7 @@ import DetailedView from "./pages/DetailedView.jsx";
 
 function App() {
   const [allModels, setAllModels] = useState([]);
-  const [aModel, setAModel] = useState([]);
+  //const [aModel, setAModel] = useState([]);
 
   const getData = async () => {
     const newData = await Data.getAllData();
@@ -46,7 +46,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<ListView allModels={allModels} />} />
-        <Route path="/:id" element={<DetailedView aModel={aModel} />} />
+        <Route path="/:id" element={<DetailedView />} />
       </Routes>
       <Footer />
     </div>

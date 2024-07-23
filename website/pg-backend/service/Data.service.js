@@ -25,7 +25,7 @@ export default class DataService {
     a.access, 
     l.license, 
     mo.modality,
-    o.organization_logo_url,
+
     s.size
 FROM student.de10_na_horizonx_model m
 JOIN student.de10_na_horizonx_access a USING(access_id)
