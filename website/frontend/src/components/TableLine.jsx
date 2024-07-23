@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import Stringify from "../util/Stringify.util";
 
-function TableLine({ lineData, setAModel }) {
+function TableLine({ lineData }) {
   const navigate = useNavigate();
   const onClickHandler = () => {
-    setAModel(lineData);
+    // setAModel(lineData);
     navigate(`/${lineData.model_id}`);
   };
+  console.log(lineData, `<--tableLine`);
 
   // Function to truncate description to 150 characters
   const truncateDescription = (description) => {
@@ -23,11 +24,15 @@ function TableLine({ lineData, setAModel }) {
       onClick={onClickHandler}
     >
       <td className="px-4 py-2 border">{lineData.name}</td>
-      <td className="px-4 py-2 border">{Stringify.text(lineData.organizations)}</td>
-      <td className="px-4 py-2 border" title={lineData.description||''}>
+      <td className="px-4 py-2 border">
+        {Stringify.text(lineData.organizations)}
+      </td>
+      <td className="px-4 py-2 border" title={lineData.description || ""}>
         {truncateDescription(lineData.description)}
       </td>
-      <td className="px-4 py-2 border">{creationDate.toLocaleDateString('en-GB')}</td>
+      <td className="px-4 py-2 border">
+        {creationDate.toLocaleDateString("en-GB")}
+      </td>
       <td className="px-4 py-2 border">
         {lineData.score_business_readiness} / {lineData.score_perceived_value}
       </td>

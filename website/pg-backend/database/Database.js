@@ -14,14 +14,13 @@ export default class Database {
       password: process.env.DB_PASSWORD,
       host: this.#host,
       port: this.#port,
-      database: process.env.DB_NAME
+      database: process.env.DB_NAME,
       //connectionString:`postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${host}:${port}/${process.env.DB_NAME}`
     });
   }
   connect = async () => {
     try {
       await Database.#client.connect();
-      //console.log(Database.#client);
       console.log("db connection established");
     } catch (error) {
       console.log(error.message);
