@@ -105,12 +105,30 @@ function DetailedView() {
         </section>
         <hr className="my-5" />
         <section>
-          <h4 className={h4Class}>Modality:</h4>{" "}
-          <p>{modelData.modality || "Unknown"}</p>
-          <h4 className={h4Class}>Analysis:</h4>{" "}
+          <p className="pb-2">
+            <span className={h4Class}>Modality:</span>{" "}
+            {modelData.modality || "Unknown"}
+          </p>
+          <p className="pb-2">
+            <span className={h4Class}>Analysis:</span>{" "}
+            {modelData.analysis || "Unknown"}
+          </p>
+          <p className="pb-2">
+            <span className={h4Class}>Dependencies:</span>{" "}
+            {modelData.dependencyString || "Unknown"}
+          </p>
+          <p className="pb-2">
+            <span className={h4Class}>Model Card: </span>{" "}
+            <a
+              className="text-red-500/75"
+              href={modelData.model_card || "Unknown"}
+              target="_blank"
+            >
+              View the Model Card
+            </a>
+          </p>
+          {/* <h4 className={h4Class}>Analysis:</h4>{" "}
           <p>{modelData.analysis || "Unknown"}</p>
-          <h4 className={h4Class}>Size:</h4>{" "}
-          <p>{modelData.size || "Unknown"}</p>
           <h4 className={h4Class}>Dependencies:</h4>{" "}
           <p>{dependencyString || "Unknown"}</p>
           <h4 className={h4Class}>Model Card:</h4>
@@ -120,36 +138,42 @@ function DetailedView() {
             target="_blank"
           >
             View the Model Card
-          </a>
+          </a> */}
         </section>
         <hr className="my-5" />
-        <p>
-          <span className={h4Class}>Training Emissions: </span>{" "}
-          {modelData.training_emissions || "Unknown"}
-        </p>
-        <p>
-          <span className={h4Class}>Training Time:</span>{" "}
-          {modelData.training_time || "Unknown"}
-        </p>
-        <p>
-          <span className={h4Class}>Training Hardware: </span>{" "}
-          {modelData.training_hardware || "Unknown"}
-        </p>
+        <section>
+          <p className="pb-2">
+            <span className={h4Class}>Quality Control:</span>{" "}
+            {modelData.quality_control || "Unknown"}
+          </p>
+          <p className="pb-2">
+            <span className={h4Class}>Monitoring:</span>{" "}
+            {modelData.monitoring || "Unknown"}
+          </p>
+          <p className="pb-2">
+            <span className={h4Class}>Feedback: </span>{" "}
+            <a href={modelData.feedback}>{modelData.feedback || "Unknown"}</a>
+          </p>
+        </section>
         <hr className="my-5" />
-        <p>
-          <span className={h4Class}>Quality Control:</span>{" "}
-          {modelData.quality_control || "Unknown"}
-        </p>
-        <hr className="my-5" />
-        <p>
-          <span className={h4Class}>Monitoring:</span>{" "}
-          {modelData.monitoring || "Unknown"}
-        </p>
-        <p>
-          <span className={h4Class}>Feedback: </span>{" "}
-          <a href={modelData.feedback}>{modelData.feedback || "Unknown"}</a>
-        </p>
-
+        <section>
+          <p className="pb-2">
+            <span className={h4Class}>Size: </span>{" "}
+            {modelData.size || "Unknown"}
+          </p>
+          <p className="pb-2">
+            <span className={h4Class}>Training Emissions: </span>{" "}
+            {modelData.training_emissions || "Unknown"}
+          </p>
+          <p className="pb-2">
+            <span className={h4Class}>Training Time:</span>{" "}
+            {modelData.training_time || "Unknown"}
+          </p>
+          <p className="pb-2">
+            <span className={h4Class}>Training Hardware: </span>{" "}
+            {modelData.training_hardware || "Unknown"}
+          </p>
+        </section>
         <hr className="my-5" />
       </article>
     </div>

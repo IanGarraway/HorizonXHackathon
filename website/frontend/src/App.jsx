@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
+import { useCookies } from "react-cookie";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import Data from "./services/Data.service.js";
 import DetailedView from "./pages/DetailedView.jsx";
@@ -8,9 +9,12 @@ import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
 import ListView from "./pages/ListView.jsx";
 import Matrix from "./pages/Matrix.jsx";
+import Auth from "./pages/Auth.jsx";
 
 function App() {
   const [allModels, setAllModels] = useState([]);
+  const [user, setUser] = useState({ loggedIn: false });
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
   const getData = async () => {
     const newData = await Data.getAllData();
@@ -22,6 +26,14 @@ function App() {
   useEffect(() => {
     getData();
   }, []);
+  useEffect(() => {
+    const cookie = cookies.user;
+    if (cookie !== undefined) {
+      setUser(cookie);
+    }
+  }, [cookies.user]);
+
+  console.log(import.meta.env.MODE);
 
   return (
     <div className="min-h-screen font-open flex flex-col">
@@ -44,11 +56,12 @@ function App() {
         >
           {" "}
         </div>
-        <Header />
+        <Header user={user} />
         <Routes>
           <Route path="/" element={<ListView allModels={allModels} />} />
           <Route path="/:id" element={<DetailedView />} />
           <Route path="/matrix" element={<Matrix />} />
+          <Route path="/auth" element={<Auth setUser={setUser} />} />
         </Routes>
       </div>
       <Footer />

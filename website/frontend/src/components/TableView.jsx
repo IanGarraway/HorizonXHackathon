@@ -12,7 +12,6 @@ function TableView({ allModels, filters }) {
 
   const generateTable = () => {
     const filteredModels = Filter.filterModels(allModels, filters);
-    console.log(filteredModels, `<---`);
     const tableData = filteredModels.map((data) => (
       <TableLine lineData={data} key={data.model_id} />
     ));
@@ -38,7 +37,7 @@ function TableView({ allModels, filters }) {
                 Name
                 <button />
               </th>
-              <th className="px-4 py-2 border">Organisation</th>
+              <th className="px-4 py-2 border">Organization</th>
               <th className="px-4 py-2 border">Description</th>
               <th className="px-4 py-2 border">Created</th>
               <th className="px-4 py-2 border">Score X / Y</th>
@@ -50,11 +49,11 @@ function TableView({ allModels, filters }) {
       <div
         id="tooltip-name"
         role="tooltip"
-        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+        className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
         data-tooltip="tooltip-name"
       >
         Tooltip on top
-        <div class="tooltip-arrow" data-popper-arrow></div>
+        <div className="tooltip-arrow" data-popper-arrow></div>
       </div>
     </>
   );

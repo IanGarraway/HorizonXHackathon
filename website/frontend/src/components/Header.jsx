@@ -1,10 +1,23 @@
 import { useState } from "react";
 import { Dialog, DialogPanel, PopoverGroup } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
-export default function Example() {
+import AuthService from "../services/Auth.service.js";
+
+export default function Header({ user }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navigateTo = useNavigate();
+
+  const logoutHandler = async () => {
+    const response = await AuthService.logout();
+    if (response.status === 200) {
+      setCookie("user", "userData", { path: "/", maxAge: 0 });
+      setUser({ loggedIn: false });
+      navigateTo("/");
+    }
+  };
 
   return (
     <header className="bg-white border-red-500 border-b-2 mb-7 drop-shadow-md">
@@ -42,9 +55,21 @@ export default function Example() {
           </NavLink>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="font-poppins text-sm leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          {user.loggedIn ? (
+            <Link
+              className="font-poppins text-sm leading-6 text-gray-900"
+              onClick={logoutHandler()}
+            >
+              Log out <span aria-hidden="true">&rarr;</span>
+            </Link>
+          ) : (
+            <Link
+              to="/auth"
+              className="font-poppins text-sm leading-6 text-gray-900"
+            >
+              Log in <span aria-hidden="true">&rarr;</span>
+            </Link>
+          )}
         </div>
       </nav>
       <Dialog
