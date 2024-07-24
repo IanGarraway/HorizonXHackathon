@@ -4,10 +4,16 @@ import jwt from "jsonwebtoken";
 // import User from '../models/User.model.js';
 
 export default class AccountService {
+  
   login = async ({ username, password }) => {
+    
+    try{
+    console.log(username, `<>`, password);
     let user = { name: username };
     if (username == "demoUser") {
+      console.log("hmmm");
       if (password == "demoPass") {
+        console.log("haasa");
         const token = jwt.sign(
           {
             id: username,
@@ -20,6 +26,7 @@ export default class AccountService {
           }
         );
         user.token = token;
+        console.log("demoUser");
       }
     } else if (username == "demoAdmin") {
       if (password == "demoPass") {
@@ -35,12 +42,17 @@ export default class AccountService {
           }
         );
         user.token = token;
+        console.log("demoAdmin");
       }
     } else {
+      console.log("error");
       throw new Error("Invalid Login details");
     }
 
-    return user;
+      return user;
+    } catch (e) {
+      console.log(e.message);
+      }
 
     // const user = await User.findOne({ userName: username.toLowerCase() });
 
