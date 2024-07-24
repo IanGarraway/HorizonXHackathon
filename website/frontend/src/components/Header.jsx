@@ -40,12 +40,6 @@ export default function Example() {
           >
             Matrix
           </NavLink>
-          <NavLink
-            to="/about"
-            className="font-poppins text-sm leading-6 text-gray-900"
-          >
-            About
-          </NavLink>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <a href="#" className="font-poppins text-sm leading-6 text-gray-900">
@@ -92,12 +86,6 @@ export default function Example() {
                   className="font-poppins -mx-3 block rounded-lg px-3 py-2 text-base leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Matrix
-                </NavLink>
-                <NavLink
-                  to="/about"
-                  className="font-poppins -mx-3 block rounded-lg px-3 py-2 text-base leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  About
                 </NavLink>
               </div>
               {/* <div className="py-6">
