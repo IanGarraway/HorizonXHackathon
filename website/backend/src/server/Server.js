@@ -1,6 +1,6 @@
 import cookieParser from 'cookie-parser';
 import express from 'express';
-// import cors from 'cors';
+import cors from 'cors';
 
 
 
@@ -10,19 +10,19 @@ export default class Server{
     #port;
     #adminRouter;
     #accountRouter;
-    #gameRouter;
+    #dataRouter;
     #server;
     #allowedOrigin
     
     
-    constructor(port, host, accountRoutes, adminRoutes, gameRoutes, allowedOrigin) {
+    constructor(port, host, accountRoutes, adminRoutes, dataRoutes, allowedOrigin) {
         this.#app = express();
         this.#port = port;
         this.#host = host;
         this.#server = null;
         this.#adminRouter = adminRoutes;
         this.#accountRouter = accountRoutes;
-        this.#gameRouter = gameRoutes;
+        this.#dataRouter = dataRoutes;
         this.#allowedOrigin = allowedOrigin;
         
     }
@@ -53,8 +53,8 @@ export default class Server{
             this.#adminRouter.getRouter()
         );
         this.#app.use(
-            this.#gameRouter.getRouteStartPoint(),
-            this.#gameRouter.getRouter()
+            this.#dataRouter.getRouteStartPoint(),
+            this.#dataRouter.getRouter()
         );
 
         this.#server = this.#app.listen(this.#port, this.#host, () => {
