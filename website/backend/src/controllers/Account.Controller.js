@@ -7,19 +7,19 @@ import DataService from "../services/Data.Service.js";
 
 const { SECURE } = process.env;
 
+export default class AccountController {
+  #accountService;
+  #dataService;
 
-export default class AccountController{
-    #accountService;
-    #dataService;
+  constructor(
+    accountService = new AccountService(),
+    dataService = new DataService()
+  ) {
+    this.#accountService = accountService;
+    this.#dataService = dataService;
+  }
 
-    constructor(accountService = new AccountService, dataService = new DataService) {
-        this.#accountService = accountService;
-        this.#dataService = dataService;
-    }
-
-
-
-    newUser = async (req, res) => {             
+  newUser = async (req, res) => {
     //     try {
     //         const errors = validationResult(req);
     //         if (!errors.isEmpty()) {
@@ -32,80 +32,79 @@ export default class AccountController{
     //             name: req.body.name,
     //             admin: false
     //         });
-
     //         await user.save();
     //         await this.#dataService.newAccount(user._id);
     //         return res.status(201).send({ message: "User was registered successfully" });
     //     } catch (error) {
     //         console.log("Registration error -->", error);
-
     //         return res.status(500).send({ message: error.message || "Some error occurred while attempting to register" });
     //     }
-    }
+  };
 
-    login = async (req, res) => {        
-        try {
-            
-            let user = await this.#accountService.login(req.body);           
-            
-            return res.status(200)
-                .cookie('token', user.Token, {
-                    httpOnly: true,
-                    secure: SECURE, //needs to be true if on https
-                    sameSite: 'Strict',
-                    maxAge: 86400000 //24 hours in milliseconds 
-                })
-                .send({ message: "User has logged in", username: user.userName, ...(user.admin&&{admin: true}) });
-            
-        } catch (error) {
-            //console.log(error);
-            res.status(401).json(error);
-        }        
+  login = async (req, res) => {
+    try {
+      let user = await this.#accountService.login(req.body);
+      console.log(user, `<---`);
+      return res
+        .status(200)
+        .cookie("token", user.Token, {
+          httpOnly: true,
+          secure: SECURE, //needs to be true if on https
+          sameSite: "Strict",
+          maxAge: 86400000, //24 hours in milliseconds
+        })
+        .send({
+          message: "User has logged in",
+          username: user.name,
+          ...(user.admin && { admin: true }),
+        });
+    } catch (error) {
+      //console.log(error);
+      res.status(401).json(error);
     }
+  };
 
-    changePassword = async (req, res) => {
-        
-        try {
-            let user = await this.#accountService.changePassword(req);
-            return res.status(200).send({ message: "Password changed" });
-        } catch (error) {
-            //console.log(`Error in password change ->`, error);
-            res.status(401).json(error);
-        }
+  changePassword = async (req, res) => {
+    try {
+      let user = await this.#accountService.changePassword(req);
+      return res.status(200).send({ message: "Password changed" });
+    } catch (error) {
+      //console.log(`Error in password change ->`, error);
+      res.status(401).json(error);
     }
+  };
 
-    deleteAccount = async (req, res) => {
-        try {
-            let user = await this.#accountService.deleteAccount(req);
-            return res.status(200)
-                .cookie('token', "", {
-                    httpOnly: true,
-                    secure: SECURE, //needs to be true if on https
-                    sameSite: 'Strict',
-                    maxAge: 0 //revokes existing token cookie
-                })
-                .send({ message: "Account deleted" });
-        } catch (error) {
-            res.status(401).send({message: "Unauthorised"}).json(error);
-        }
+  deleteAccount = async (req, res) => {
+    try {
+      let user = await this.#accountService.deleteAccount(req);
+      return res
+        .status(200)
+        .cookie("token", "", {
+          httpOnly: true,
+          secure: SECURE, //needs to be true if on https
+          sameSite: "Strict",
+          maxAge: 0, //revokes existing token cookie
+        })
+        .send({ message: "Account deleted" });
+    } catch (error) {
+      res.status(401).send({ message: "Unauthorised" }).json(error);
     }
+  };
 
-    logout = async (req, res) => {        
-        try {
-            
-            return res.status(200)
-                .cookie('token', "logout", {
-                    httpOnly: true,
-                    secure: SECURE, //needs to be true if on https
-                    sameSite: 'None',
-                    maxAge: 0 
-                })
-                .send({ message: "User has logged out" });
-            
-        } catch (error) {
-            //console.log(error);
-            res.status(401).json(error);
-        }        
+  logout = async (req, res) => {
+    try {
+      return res
+        .status(200)
+        .cookie("token", "logout", {
+          httpOnly: true,
+          secure: SECURE, //needs to be true if on https
+          sameSite: "None",
+          maxAge: 0,
+        })
+        .send({ message: "User has logged out" });
+    } catch (error) {
+      //console.log(error);
+      res.status(401).json(error);
     }
-    
+  };
 }

@@ -27,40 +27,21 @@ export default function AuthForm({ setUser }) {
     setFormError({});
   }, [username, email, password]);
 
-  //   const validateEmail = () => {
-  //     const emailValid = isEmailValid(email);
-  //     setBtnIsDisabled(!emailValid);
-  //     setFormError((prevErrors) => ({
-  //       ...prevErrors,
-  //       email: emailValid ? "" : "Invalid email format.",
-  //     }));
-  //   };
-
-  //   const validatePassword = () => {
-  //     const passwordValid = isPasswordValid(password);
-  //     setBtnIsDisabled(!passwordValid);
-  //     setFormError((prevErrors) => ({
-  //       ...prevErrors,
-  //       password: passwordValid
-  //         ? ""
-  //         : "Password must contain at least one lowercase letter, one capital letter, one number, one special character, and be between 8-15 characters long.",
-  //     }));
-  //   };
-
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
       const response = await AuthService.login(username, password);
-      checkForAdminRole(data, setIsAdmin);
       if (response.status == 200) {
         const userData = {
           username: response.data.username,
           loggedIn: true,
           ...(response.data.admin && { admin: true }),
         };
-        setUser(userData);
         setCookie("user", userData, { path: "/", maxAge: 86400 });
+        setUser(userData);
         navigateTo("/");
+      } else {
+        setError(response.status);
       }
 
       //setHasCookie(true);

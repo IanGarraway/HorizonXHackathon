@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const apiURL = import.meta.env.VITE_APP_AUTHAPI;
+const apiURL = import.meta.env.VITE_AUTHAPI;
 
 export default class AuthService {
   static async login(username, password) {
     const response = await axios.post(
-      `http://127.0.0.1:4001/login`,
+      `${apiURL}/login`,
       {
         username: username,
         password: password,
@@ -18,7 +18,7 @@ export default class AuthService {
   }
 
   static async logout() {
-    const response = await axios.post(`http://127.0.0.1:4001/logout`, {
+    const response = await axios.post(`${apiURL}/logout`, {
       withCredentials: true,
     });
     return response;

@@ -24,21 +24,4 @@ export default class Filter {
     });
     return newList;
   }
-
-  static filterModels(modelList, filters) {
-    return modelList.filter((model) => {
-      // Check for name filter
-      const nameMatch = filters.name
-        ? model.name.toLowerCase().includes(filters.name.toLowerCase())
-        : true;
-      // Check for organization filter
-      const orgMatch = filters.organisation
-        ? Stringify.text(model.organizations)
-            .toLowerCase()
-            .includes(filters.organisation.toLowerCase())
-        : true;
-      // Model passes if it matches all filters
-      return nameMatch && orgMatch;
-    });
-  }
 }

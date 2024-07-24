@@ -4,55 +4,49 @@ import jwt from "jsonwebtoken";
 // import User from '../models/User.model.js';
 
 export default class AccountService {
-  
   login = async ({ username, password }) => {
-    
-    try{
-    console.log(username, `<>`, password);
-    let user = { name: username };
-    if (username == "demoUser") {
-      console.log("hmmm");
-      if (password == "demoPass") {
-        console.log("haasa");
-        const token = jwt.sign(
-          {
-            id: username,
-            username: username,
-            admin: false,
-          },
-          process.env.SECRET,
-          {
-            expiresIn: 86400,
-          }
-        );
-        user.token = token;
-        console.log("demoUser");
+    try {
+      let user = { name: username };
+      if (username == "demoUser") {
+        if (password == "demoPass") {
+          const token = jwt.sign(
+            {
+              id: username,
+              username: username,
+              admin: false,
+            },
+            process.env.SECRET,
+            {
+              expiresIn: 86400,
+            }
+          );
+          user.token = token;
+        }
+      } else if (username == "demoAdmin") {
+        if (password == "demoPass") {
+          const token = jwt.sign(
+            {
+              id: username,
+              username: username,
+              admin: true,
+            },
+            process.env.SECRET,
+            {
+              expiresIn: 86400,
+            }
+          );
+          user.token = token;
+          c;
+        }
+      } else {
+        console.log("error");
+        throw new Error("Invalid Login details");
       }
-    } else if (username == "demoAdmin") {
-      if (password == "demoPass") {
-        const token = jwt.sign(
-          {
-            id: username,
-            username: username,
-            admin: true,
-          },
-          process.env.SECRET,
-          {
-            expiresIn: 86400,
-          }
-        );
-        user.token = token;
-        console.log("demoAdmin");
-      }
-    } else {
-      console.log("error");
-      throw new Error("Invalid Login details");
-    }
 
       return user;
     } catch (e) {
       console.log(e.message);
-      }
+    }
 
     // const user = await User.findOne({ userName: username.toLowerCase() });
 

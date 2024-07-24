@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Dialog, DialogPanel, PopoverGroup } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 import AuthService from "../services/Auth.service.js";
 
-export default function Header({ user }) {
+export default function Header({ user, setUser }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cookies, setCookie] = useCookies(["user"]);
 
   const navigateTo = useNavigate();
 
@@ -58,9 +60,9 @@ export default function Header({ user }) {
           {user.loggedIn ? (
             <Link
               className="font-poppins text-sm leading-6 text-gray-900"
-              onClick={logoutHandler()}
+              onClick={logoutHandler}
             >
-              Log out <span aria-hidden="true">&rarr;</span>
+              Log out, {user.username} <span aria-hidden="true">&rarr;</span>
             </Link>
           ) : (
             <Link
@@ -113,14 +115,24 @@ export default function Header({ user }) {
                   Matrix
                 </NavLink>
               </div>
-              {/* <div className="py-6">
-                <a
-                  href="#"
-                  className="font-poppins -mx-3 block rounded-lg px-3 py-2.5 text-base leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
-                </a>
-              </div> */}
+              <div className="py-6">
+                {user.loggedIn ? (
+                  <Link
+                    className="font-poppins text-sm leading-6 text-gray-900"
+                    onClick={logoutHandler}
+                  >
+                    Log out, {user.username}{" "}
+                    <span aria-hidden="true">&rarr;</span>
+                  </Link>
+                ) : (
+                  <Link
+                    to="/auth"
+                    className="font-poppins text-sm leading-6 text-gray-900"
+                  >
+                    Log in <span aria-hidden="true">&rarr;</span>
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </DialogPanel>

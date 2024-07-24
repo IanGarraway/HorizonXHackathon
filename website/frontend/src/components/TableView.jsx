@@ -11,11 +11,16 @@ function TableView({ allModels, filters }) {
   }, [allModels, filters]);
 
   const generateTable = () => {
-    const filteredModels = Filter.filterModels(allModels, filters);
-    const tableData = filteredModels.map((data) => (
+    let modelData = allModels;
+    if (filters.name) {
+      modelData = Filter.byName(modelData, filters.name);
+    }
+    if (filters.organisation) {
+      modelData = Filter.byOrganisation(modelData, filters.organisation);
+    }
+    const tableData = modelData.map((data) => (
       <TableLine lineData={data} key={data.model_id} />
     ));
-
     setTableLines(tableData);
   };
 

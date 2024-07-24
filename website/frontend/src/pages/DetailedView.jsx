@@ -127,18 +127,6 @@ function DetailedView() {
               View the Model Card
             </a>
           </p>
-          {/* <h4 className={h4Class}>Analysis:</h4>{" "}
-          <p>{modelData.analysis || "Unknown"}</p>
-          <h4 className={h4Class}>Dependencies:</h4>{" "}
-          <p>{dependencyString || "Unknown"}</p>
-          <h4 className={h4Class}>Model Card:</h4>
-          <a
-            className="text-red-500/75"
-            href={modelData.model_card || "Unknown"}
-            target="_blank"
-          >
-            View the Model Card
-          </a> */}
         </section>
         <hr className="my-5" />
         <section>

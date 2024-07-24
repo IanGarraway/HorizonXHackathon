@@ -1,7 +1,7 @@
 const Matrix = () => {
   return (
-    <div>
-      <h1>Modello-Pharus Matrix</h1>
+    <div className="px-5">
+      <h2>Rationale</h2>
       <iframe
         title="Modello-Pharus Matrix"
         src={`./modello_pharus_matrix.html`}

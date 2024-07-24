@@ -33,7 +33,7 @@ function App() {
     }
   }, [cookies.user]);
 
-  console.log(import.meta.env.MODE);
+  console.log(import.meta.env.VITE_API);
 
   return (
     <div className="min-h-screen font-open flex flex-col">
@@ -56,7 +56,7 @@ function App() {
         >
           {" "}
         </div>
-        <Header user={user} />
+        <Header user={user} setUser={setUser} />
         <Routes>
           <Route path="/" element={<ListView allModels={allModels} />} />
           <Route path="/:id" element={<DetailedView />} />
