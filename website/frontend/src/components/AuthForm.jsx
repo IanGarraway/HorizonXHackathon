@@ -54,13 +54,13 @@ export default function AuthForm({ setUser }) {
     <div className="mt-8 max-w-md mx-auto">
       <form onSubmit={onSubmitHandler} className="grid grid-cols-1 gap-6 mb-5">
         <label htmlFor="email" className="block">
-          <span className="text-gray-700">Email</span>
+{/*           <span className="text-gray-700">Username</span> */}
           <input
             type="text"
             name="username"
             id="username"
             autoComplete="username"
-            placeholder="demoname"
+            placeholder="username"
             className="p-2 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             onChange={(e) => setUsername(e.target.value)}
             value={username}
@@ -72,7 +72,7 @@ export default function AuthForm({ setUser }) {
             </p>
           )}
         </label>
-        <label htmlFor="password" className="block">
+{/*         <label htmlFor="password" className="block"> */}
           <span>Password</span>
           <input
             type="password"
