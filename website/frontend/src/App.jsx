@@ -24,31 +24,33 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen font-open">
-      <div
-        style={{
-          backgroundImage: "url('logo.png')",
-          opacity: "0.04",
-          height: "100vh",
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-          position: "fixed",
-          top: "0px",
-          right: "0px",
-          bottom: "0px",
-          left: "0px",
-          zIndex: "-1",
-        }}
-      >
-        {" "}
+    <div className="min-h-screen font-open flex flex-col">
+      <div className="flex-grow">
+        <div
+          style={{
+            backgroundImage: "url('logo.png')",
+            opacity: "0.04",
+            height: "100vh",
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            position: "fixed",
+            top: "0px",
+            right: "0px",
+            bottom: "0px",
+            left: "0px",
+            zIndex: "-1",
+          }}
+        >
+          {" "}
+        </div>
+        <Header />
+        <Routes>
+          <Route path="/" element={<ListView allModels={allModels} />} />
+          <Route path="/:id" element={<DetailedView />} />
+          <Route path="/matrix" element={<Matrix />} />
+        </Routes>
       </div>
-      <Header />
-      <Routes>
-        <Route path="/" element={<ListView allModels={allModels} />} />
-        <Route path="/:id" element={<DetailedView />} />
-        <Route path="/matrix" element={<Matrix />} />
-      </Routes>
       <Footer />
     </div>
   );

@@ -26,6 +26,8 @@ function DetailedView() {
 
   const h4Class = "font-poppins text-gray-500 font-bold";
 
+  const creationDate = new Date(modelData.created_date);
+
   return (
     <div className="flex justify-center">
       <article className="w-3/5 pb-5">
@@ -41,19 +43,21 @@ function DetailedView() {
                 {orgs}
               </h3>
               <h1 className="font-poppins text-3xl pb-3">{modelData.name}</h1>
-              <p className="text-sm pb-3">Created: {modelData.created_date}</p>
+              <p className="text-sm pb-3">
+                Created: {creationDate.toLocaleDateString("en-GB")}
+              </p>
             </span>
             <Card className="md:justify-self-end md:text-right text-sm">
               <p className="font-poppins text-gray-500 font-bold">
                 LightHouse Score
               </p>
               <span>
-                <div class="mb-1 font-bold text-gray-500">
+                <div className="mb-1 font-semibold text-gray-500">
                   Readiness: {modelData.score_business_readiness}
                 </div>
-                <div class="w-full bg-gray-200 rounded-full h-1.5 mb-4 dark:bg-gray-700">
+                <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
                   <div
-                    class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"
+                    className="bg-fire h-2 rounded-full"
                     style={{
                       width: `${modelData.score_business_readiness * 10}%`,
                     }}
@@ -61,12 +65,12 @@ function DetailedView() {
                 </div>
               </span>
               <span>
-                <div class="mb-1 font-bold text-gray-500">
+                <div className="mb-1 font-semibold text-gray-500">
                   Perceived Value: {modelData.score_perceived_value}
                 </div>
-                <div class="w-full bg-gray-200 rounded-full h-2 mb-4 dark:bg-gray-700">
+                <div className="w-full bg-gray-200 rounded-full h-2 mb-4 dark:bg-gray-700">
                   <div
-                    class="bg-orange-600 h-2 rounded-full dark:bg-blue-500"
+                    className="bg-fire h-2 rounded-full"
                     style={{
                       width: `${modelData.score_perceived_value * 10}%`,
                     }}
@@ -86,29 +90,33 @@ function DetailedView() {
         <section className="grid grid-cols-3 gap-3">
           <span className="col-span-2 border-r-2">
             <h4 className={h4Class}>Intended Uses:</h4>
-            <p>{modelData.intended_uses || "No data"}</p>
+            <p>{modelData.intended_uses || "Unknown"}</p>
             <br />
             <h4 className={h4Class}>Prohibited Uses:</h4>
-            <p>{modelData.prohibited_uses}</p>
+            <p>{modelData.prohibited_uses || "Unknown"}</p>
           </span>
           <span>
             <h4 className={h4Class}>License:</h4>
-            <p>{modelData.license}</p>
+            <p>{modelData.license || "Unknown"}</p>
             <br />
             <h4 className={h4Class}>Access:</h4>
-            <p>{modelData.access}</p>
+            <p>{modelData.access || "Unknown"}</p>
           </span>
         </section>
         <hr className="my-5" />
         <section>
-          <h4 className={h4Class}>Modality:</h4> <p>{modelData.modality}</p>
-          <h4 className={h4Class}>Analysis:</h4> <p>{modelData.analysis}</p>
-          <h4 className={h4Class}>Size:</h4> <p>{modelData.size}</p>
-          <h4 className={h4Class}>Dependencies:</h4> <p>{dependencyString}</p>
+          <h4 className={h4Class}>Modality:</h4>{" "}
+          <p>{modelData.modality || "Unknown"}</p>
+          <h4 className={h4Class}>Analysis:</h4>{" "}
+          <p>{modelData.analysis || "Unknown"}</p>
+          <h4 className={h4Class}>Size:</h4>{" "}
+          <p>{modelData.size || "Unknown"}</p>
+          <h4 className={h4Class}>Dependencies:</h4>{" "}
+          <p>{dependencyString || "Unknown"}</p>
           <h4 className={h4Class}>Model Card:</h4>
           <a
             className="text-red-500/75"
-            href={modelData.model_card}
+            href={modelData.model_card || "Unknown"}
             target="_blank"
           >
             View the Model Card
@@ -117,28 +125,29 @@ function DetailedView() {
         <hr className="my-5" />
         <p>
           <span className={h4Class}>Training Emissions: </span>{" "}
-          {modelData.training_emissions}
+          {modelData.training_emissions || "Unknown"}
         </p>
         <p>
           <span className={h4Class}>Training Time:</span>{" "}
-          {modelData.training_time}
+          {modelData.training_time || "Unknown"}
         </p>
         <p>
           <span className={h4Class}>Training Hardware: </span>{" "}
-          {modelData.training_hardware}
+          {modelData.training_hardware || "Unknown"}
         </p>
         <hr className="my-5" />
         <p>
           <span className={h4Class}>Quality Control:</span>{" "}
-          {modelData.quality_control}
+          {modelData.quality_control || "Unknown"}
         </p>
         <hr className="my-5" />
         <p>
-          <span className={h4Class}>Monitoring:</span> {modelData.monitoring}
+          <span className={h4Class}>Monitoring:</span>{" "}
+          {modelData.monitoring || "Unknown"}
         </p>
         <p>
           <span className={h4Class}>Feedback: </span>{" "}
-          <a href={modelData.feedback}>{modelData.feedback}</a>
+          <a href={modelData.feedback}>{modelData.feedback || "Unknown"}</a>
         </p>
 
         <hr className="my-5" />
