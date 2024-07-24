@@ -16,7 +16,7 @@ export default class Data {
   }
 
   static async getOneModel(id) {
-    const response = await axios.get(`http://127.0.0.1:4000/${id}`);
+    const response = await axios.get(`${import.meta.env.VITE_API}/${id}`);
     return response.data;
   }
 }
