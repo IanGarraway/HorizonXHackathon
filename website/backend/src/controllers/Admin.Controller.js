@@ -1,4 +1,3 @@
-import User from "../models/User.model.js";
 import AdminService from "../services/Admin.Service.js";
 
 

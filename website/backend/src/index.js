@@ -14,8 +14,8 @@ const adminRoutes = new AdminRoutes(ALLOWED_ORIGIN);
 const dataRoutes = new DataRoutes(ALLOWED_ORIGIN);
 
 const server = new Server(PORT, HOST, accountRoutes, adminRoutes, dataRoutes, ALLOWED_ORIGIN);
-const database = new Database(DB_URI);
+//const database = new Database(DB_URI);
 
 
 server.start();
-await database.connect();
+// await database.connect();

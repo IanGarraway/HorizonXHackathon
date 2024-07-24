@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 
 import AccountService from "../services/Account.Service.js";
-import User from "../models/User.model.js";
+//import User from "../models/User.model.js";
 import { validationResult } from "express-validator";
 import DataService from "../services/Data.Service.js";
 
@@ -20,27 +20,27 @@ export default class AccountController{
 
 
     newUser = async (req, res) => {             
-        try {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return res.status(422).json({ message: 'Validation failed', errors: errors.array() });
-            }
-            const user = new User({
-                userName: req.body.username.toLowerCase(),
-                userPassword: bcrypt.hashSync(req.body.password, 10),
-                email: req.body.email.toLowerCase(),
-                name: req.body.name,
-                admin: false
-            });
+    //     try {
+    //         const errors = validationResult(req);
+    //         if (!errors.isEmpty()) {
+    //             return res.status(422).json({ message: 'Validation failed', errors: errors.array() });
+    //         }
+    //         const user = new User({
+    //             userName: req.body.username.toLowerCase(),
+    //             userPassword: bcrypt.hashSync(req.body.password, 10),
+    //             email: req.body.email.toLowerCase(),
+    //             name: req.body.name,
+    //             admin: false
+    //         });
 
-            await user.save();
-            await this.#dataService.newAccount(user._id);
-            return res.status(201).send({ message: "User was registered successfully" });
-        } catch (error) {
-            console.log("Registration error -->", error);
+    //         await user.save();
+    //         await this.#dataService.newAccount(user._id);
+    //         return res.status(201).send({ message: "User was registered successfully" });
+    //     } catch (error) {
+    //         console.log("Registration error -->", error);
 
-            return res.status(500).send({ message: error.message || "Some error occurred while attempting to register" });
-        }
+    //         return res.status(500).send({ message: error.message || "Some error occurred while attempting to register" });
+    //     }
     }
 
     login = async (req, res) => {        
