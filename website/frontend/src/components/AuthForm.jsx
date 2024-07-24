@@ -72,8 +72,8 @@ export default function AuthForm({ setUser }) {
             </p>
           )}
         </label>
-{/*         <label htmlFor="password" className="block"> */}
-          <span>Password</span>
+        <label htmlFor="password" className="block">
+{/*           <span>Password</span> */}
           <input
             type="password"
             name="password"
