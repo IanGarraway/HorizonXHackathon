@@ -60,16 +60,40 @@ In website you will find three folders, one for the front end, and two for the d
 
 ### The Website
 
-From the brief, we knew the site needed to be a clean simple professional design. No garish colour schemes or excessive amounts of detailed crammed into the space and a consistent theme across the site. To link in with the competition giver's colours, a red line was used as an accent colour as part of the header, and a more muted red was used to highlight a model if the user puts their cursor over it.
+To align with the design brief, we aimed for a minimalistic yet professional look that made use of lots of whitespace. We adopted a shade of red into the simple colour palette inspired from HorizonX to accent certain elements. A muted version of the red was used as a hover effect when the cursor is over the LLM table row. The fonts Poppins and Open-sans were chosen for the headings and body text, respectively. They're popular across the technology industry and provide a clean and modern feel to the website.
 
-To break up the background a image of a lighthouse amongst some trees was generated using AI and combined with transparency turned into a background watermark.
+We chose a simple text logo to display in the left of the header, but also made use of generative AI to produce a lighthouse watermark image to use as a subtle background that is intended to add an extra dimension to the page.
+
+The page width is set to be relatively narrow, thus creating extra white space and condensing elements into an A4 shape instead of spanning the entire width of a widescreen monitor. We felt this would limit the need for eyes to wander across screens.
 
 The site is largely responsive to device, however works best landscape on mobile devices.
 
-#### Final Product
+### Final Product
 
+#### Catalog Page
 ![catalog page](images/website.png)
+We limited the table view to the minimal number of columns we thought relevant for a first glance to maintain a tidy page. The description column is set to limit the number of characters to display, so as to not bloat rows.
+
+The background is set to be transparent to allow the subtle watermark to show and add that desired extra dimension. Table headers are styled to be bold to differentiate from the body text, but coloured a muted grey so as to not be too dominating. They are highlighted with a subtle drop shadow.
+
+#### Details page
 ![Details page](images/website2.png)
+##### Structure
+The details layout is structured in a way that aims to display a high-level summary at first glance. This is achieved by grouping the LLM name, organisation, created date, documentation and description together. Added to this is a score card displaying our custom metrics for the particular LLM as a result of the matrix analysis supported with a progress bar style element to help visualise the metric. We also added logo's based on the organisation to further add some visuals.
+
+As we move down the page, the details provided become more technical and of more interest to those that are looking for specific information.
+
+Sections are clearly grouped and easily readable by making use of whitespace and horizontal rules to break up the content.
+
+#### Matrix Page
+![Matrix page](images/matrix-page.JPG)
+
+##### Structure
+The matrix page is dedicated to displaying the scoring matrix. It holds the top-most section of the page due to its importance. Below is a supporting paragraph that aims to provide a brief summary of the method behind the scoring of each LLM to provide some context.
+
+A minimal footer is displayed on every page but is easily visible with the Matrix screenshot. The footer is pushed to the bottom of the screen when the page is shorter than the browser window to make use of all the available whitespace.
+
+---
 
 #### Tech Stack
 
