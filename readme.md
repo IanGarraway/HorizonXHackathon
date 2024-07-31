@@ -5,9 +5,9 @@
 ### The Problem
 
 - What Large Language Models (LLMs) for regulated industries (banking, pharma, etc) are out there?
-- which ones should be looked into? which ones should be avoided?
+- Which ones should be looked into? which ones should be avoided?
 
-for the people who encounter these problems, what resources are there to help them over come them?
+For the people who encounter these problems, what resources are there to help them over come them?
 
 ### The Deliverables
 
@@ -53,6 +53,14 @@ In visualisation is the final product for the first deliverable, the matrix.
 In website you will find three folders, one for the front end, and two for the different microservices of the back end.
 
 ### The Data
+
+We followed the stakeholders requests to collect the data from the Stanford database for different LLMs. Nick Armstrong created a few Python scripts to connect to the Digital Futures database, process and load the data into tables in the Digital Futures database. Nick also normalised the tables so that they were easy to update. Vianka worked on adding new values, such as the Matrix scores and organisation logo URLs to the tables. Vianka also ensured that the Software Engineers had the right queries needed to return the necessary values from the tables.
+
+The Digital Futures database used a PostgreSQL Database Management System.
+
+### The Data Flow Diagram
+
+![Data Flow Diagram](images/dataFlowDiagram.png.png)
 
 ### The Matrix
 
@@ -101,9 +109,9 @@ A minimal footer is displayed on every page but is easily visible with the Matri
 - Backend: Node.js, Express.js, PostgreSQL (Database)
 - API Layer: RESTful APIs with Express.js
 
-- authentication using jwtoken in a http only cookie
+- Authentication using jwtoken in a http only cookie
   
-a demonstration version was deployed on the Render webservice. (https://modellopharus.onrender.com/)
+A demonstration version was deployed on the Render webservice. (https://modellopharus.onrender.com/)
 
 ![Tech Stack](images/techstack.png)
 
@@ -137,7 +145,7 @@ Where possible, a test driven development approach was taken, however the majori
 
 ### Website
 
-a few of the features we discussed, but were unable to implement:
+A few of the features we discussed, but were unable to implement:
 
 - Additional filter options
 - Allow the user to choose what information is displayed on the catalog.
